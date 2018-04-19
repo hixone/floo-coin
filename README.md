@@ -5,7 +5,7 @@ Block Synchronization issue
 
 1. Create a new pool, mining pool, that includes only the transactions that meet the condition. 
    
-     ex 1. the timestamp of the last block + 5000.=> all transactions that happened within the 5 minutes from the birth of last block.
+     ex 1. the timestamp of the last block + 60000*5.=> all transactions that happened within the 5 minutes from the birth of last block.
      
      
 2. Each node broadcast the hash of mining pool.
