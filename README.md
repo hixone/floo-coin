@@ -8,7 +8,7 @@ Block Synchronization issue
      ex 1. the timestamp of the last block + 60000*5.=> all transactions that happened within the 5 minutes from the birth of last block.
      
      
-2. Each node broadcast the hash of mining pool.
+2. Each node broadcasts the hash of its mining pool.
 
 3. Of the received hashes from other nodes, analyze if there is a majority and if the majority hash is over 50% of the received hashes.
 
