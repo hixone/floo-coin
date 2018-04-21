@@ -1,6 +1,6 @@
 const Transaction = require('../wallet/transaction');
-
-
+const Blockchain = require('../blockchain');
+const array=require('arrays-difference');
 
 class TransactionPool {
   constructor(){
@@ -22,8 +22,11 @@ class TransactionPool {
  existingTransaction(address){
   return this.transactions.find(t=> t.input.address === address);
 }
+   
+   
 
-  validTransactions(){
+  validTransactions(blockchain){
+
     return this.transactions.filter(transaction => {
     const outputTotal = transaction.outputs.reduce((total, output)=>{
      return total + output.amount;
@@ -32,22 +35,28 @@ class TransactionPool {
 
 
    if(transaction.input.amount !== outputTotal){
-    console.log(`Invalid transaction fro ${transaction.input.address}.`);
+    console.log(`Invalid transaction from ${transaction.input.address}.`);
      return;
 }
     if (!Transaction.verifyTransaction(transaction)){
-     console.log(`Invalid siganture from $transaction.input.address}.`);
+     console.log(`Invalid siganture from ${transaction.input.address}.`);
        return;
     
 }
-
+  if(transaction.input.timestamp > blockchain.showTimestamp()+5000){
+    return;
+  }
   return transaction;
 }); 
 
 }
-   clear() {
-     this.transactions =[];
-}
+   
+clear(arrays) {
+  
+  const difference = array(this.transactions, arrays);
+  this.transactions=difference;
+   
+}  
 }
 
 module.exports=TransactionPool;
