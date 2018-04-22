@@ -1,7 +1,7 @@
 {
   "name": "sf-chain",
   "version": "1.0.0",
-  "description": "",
+  "description": "#Issues",
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll",
@@ -33,5 +33,13 @@
     "socket.io": "^2.1.0",
     "uuid": "^3.2.1",
     "ws": "^5.1.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hixone/floo-coin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hixone/floo-coin/issues"
+  },
+  "homepage": "https://github.com/hixone/floo-coin#readme"
 }
