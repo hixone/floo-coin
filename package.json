@@ -9,7 +9,7 @@
     "start": "node ./app",
     "dev": "nodemon ./app",
     "nonstop": "forever start ./app",
-    "nonstop-list":"forever list",
+    "nonstop-list": "forever list",
     "stop": "forever stopall"
   },
   "jest": {
@@ -23,6 +23,8 @@
     "nodemon": "^1.17.3"
   },
   "dependencies": {
+    "array-difference": "0.0.1",
+    "arrays-difference": "^1.0.0",
     "body-parser": "^1.18.2",
     "crypto-js": "^3.1.9-1",
     "elliptic": "^6.4.0",
