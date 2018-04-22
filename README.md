@@ -1,12 +1,14 @@
 # Floo-coin
 
-A new cloud-based block chain
+**A new cloud-based block chain**
 
-Motivations:
 
-Floo-coin is a incentivatized blockchain evenly distributributing profits to coin holders based on share percentages.
+## Motivations:
 
-How to excute:
+**Floo-coin is a incentivatized blockchain evenly distributributing profits to coin holders based on share percentages.**
+
+
+## How to excute:
 1. git clone this repository:
 2. install npm, the latest version of nodejs on your O.S
 3. npm install to install all dependencies
