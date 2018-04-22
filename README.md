@@ -3,6 +3,7 @@
 A new cloud-based block chain
 
 Motivations:
+
 Floo-coin is a incentivatized blockchain evenly distributributing profits to coin holders based on share percentages.
 
 How to excute:
