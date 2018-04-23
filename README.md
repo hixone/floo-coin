@@ -5,7 +5,7 @@
 
 ## Motivations:
 
-**Floo-coin is a incentivatized blockchain evenly distributributing profits to coin holders based on share percentages.**
+**Floo is a incentivatized blockchain evenly distributributing profits to coin holders based on share percentages.**
 
 
 ## How to excute:
