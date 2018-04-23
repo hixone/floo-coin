@@ -48,7 +48,7 @@ class P2pServer {
           this.transactionPool.updateOrAddTransaction(data.transaction);
           break;
         case MESSAGE_TYPES.clear_transactions:
-          this.transactionPool.clear(data.blockchain);
+          this.transactionPool.clear(data.clear_transactions);
           break;
       }
     });
