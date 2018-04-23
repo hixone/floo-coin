@@ -1,6 +1,6 @@
 # Floo-coin
 
-**A new cloud-based block chain**
+**Floo is a cryptocurrency, powered and managed by cloud-based blockchain**
 
 
 ## Motivations:
