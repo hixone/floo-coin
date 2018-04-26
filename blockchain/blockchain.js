@@ -5,18 +5,22 @@ class Blockchain {
         this.chain = [Block.genesis()];
     }
 
+    getChain() {
+        return this.chain;
+    }
+
     addBlock(data) {
         const block = Block.mineBlock(this.chain[this.chain.length - 1], data);
-        console.log(`Timestamp of Last Block ${this.showTimestamp()+5000}`);
+        console.log(`Timestamp of Last Block ${this.returnLastBlockTimeStamp()+5000}`);
         this.chain.push(block);
 
         return block;
     }
 
-    showTimestamp() {
+    returnLastBlockTimeStamp() {
         const timestamp = this.chain[this.chain.length - 1].timestamp;
+        
         return timestamp;
-
     }
 
     isValidChain(chain) {

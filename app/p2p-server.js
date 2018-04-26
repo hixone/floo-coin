@@ -45,7 +45,7 @@ class P2pServer {
                     this.blockchain.replaceChain(data.chain);
                     break;
                 case MESSAGE_TYPES.transaction:
-                    this.transactionPool.updateOrAddTransaction(data.transaction);
+                    this.transactionPool.upsertTransaction(data.transaction);
                     break;
                 case MESSAGE_TYPES.clear_transactions:
                     this.transactionPool.clear(data.blockchain);

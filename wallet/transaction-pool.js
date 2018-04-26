@@ -7,7 +7,11 @@ class TransactionPool {
         this.transactions = [];
     }
 
-    updateOrAddTransaction(transaction) {
+    getTransactions() {
+        return this.transactions;
+    }
+
+    upsertTransaction(transaction) {
         let transactionWithId = this.transactions.find(t => t.id === transaction.id);
 
         if (transactionWithId) {
@@ -37,7 +41,7 @@ class TransactionPool {
                 return;
 
             }
-            if (transaction.input.timestamp > blockchain.showTimestamp() + 5000) {
+            if (transaction.input.timestamp > blockchain.returnLastBlockTimeStamp() + 5000) {
                 return;
             }
             return transaction;

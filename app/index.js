@@ -22,37 +22,39 @@ const HTTP_PORT = process.env.HTTP_PORT || 3001;
 
 const app = express();
 
-const bc = new Blockchain();
+const blockChainInstance = new Blockchain();
 const wallet = new Wallet();
-const tp = new TransactionPool();
-const p2pServer = new P2pServer(bc, tp);
-const miner = new Miner(bc, tp, wallet, p2pServer);
+const transactionPoolInstance = new TransactionPool();
+const p2pServer = new P2pServer(blockChainInstance, transactionPoolInstance);
+const miner = new Miner(blockChainInstance, transactionPoolInstance, wallet, p2pServer);
 
 app.use(bodyParser.json());
 
 app.get('/balance', (req, res) => {
-    res.json([{ balance: JSON.stringify(wallet.calculateBalance(bc)) }])
+    res.json([{ balance: JSON.stringify(wallet.calculateBalance(blockChainInstance)) }])
 });
 
 app.get('/blocks', (req, res) => {
-    res.json(bc.chain);
+    res.json(blockChainInstance.getChain());
 });
 
 app.post('/mine', (req, res) => {
-    const block = bc.addBlock(req.body.data);
+    const block = blockChainInstance.addBlock(req.body.data);
     console.log(`New block is added: ${block.toString()}`);
+
+    /* Synchronize with other nodes once mining is done */
     p2pServer.syncChain();
 
     res.redirect('/blocks');
 });
 
 app.get('/transactions', (req, res) => {
-    res.json(tp.transactions);
+    res.json(transactionPoolInstance.getTransactions());
 });
 
 app.post('/transact', (req, res) => { //calculate received transaction
     const { recipient, amount } = req.body;
-    const transaction = wallet.createTransaction(recipient, amount, bc, tp);
+    const transaction = wallet.createTransaction(recipient, amount, blockChainInstance, transactionPoolInstance);
     p2pServer.broadcastTransaction(transaction);
 
     res.redirect('/transactions');
@@ -66,7 +68,7 @@ app.get('/mine-transactions', (req, res) => {
 });
 
 app.get('/public-key', (req, res) => {
-    res.json([{ address: wallet.publicKey }]);
+    res.json([{ address: wallet.getPublicKey() }]);
 });
 
 app.listen(HTTP_PORT, () => console.log(`Listening on port ${HTTP_PORT}`));
