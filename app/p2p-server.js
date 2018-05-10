@@ -1,10 +1,11 @@
 const Websocket = require('ws');
+
 const P2P_PORT = process.env.P2P_PORT || 5001
 const peers = process.env.PEERS ? process.env.PEERS.split(',') : [];
 const MESSAGE_TYPES = {
     chain: 'CHAIN',
     transaction: 'TRANSACTION',
-    clear_transactions: 'CLEAR_TRANSACTIONS'
+    lastblocktime: 'LAST_BLOCK_TIME'
 };
 
 class P2pServer {
@@ -43,12 +44,19 @@ class P2pServer {
             switch (data.type) {
                 case MESSAGE_TYPES.chain:
                     this.blockchain.replaceChain(data.chain);
+                    
                     break;
                 case MESSAGE_TYPES.transaction:
                     this.transactionPool.upsertTransaction(data.transaction);
                     break;
-                case MESSAGE_TYPES.clear_transactions:
-                    this.transactionPool.clear(data.blockchain);
+                case MESSAGE_TYPES.lastblocktime:
+                    this.transactionPool.clear(data.lastblocktime);
+                    console.log(JSON.stringify(data.lastblocktime));
+                    
+                    
+            
+                    
+                    
                     break;
             }
         });
@@ -67,7 +75,14 @@ class P2pServer {
             transaction
         }));
     }
-
+    sendClear(socket,lastblocktime){
+        
+        socket.send(JSON.stringify({
+            type: MESSAGE_TYPES.lastblocktime,
+            lastblocktime
+        }));
+        
+    }
     syncChain() {
         this.sockets.forEach(socket => this.sendChain(socket));
     }
@@ -76,10 +91,10 @@ class P2pServer {
         this.sockets.forEach(socket => this.sendTransaction(socket, transaction));
     }
 
-    broadcastClearTransactions() {
-        this.sockets.forEach(socket => socket.send(JSON.stringify({
-            type: MESSAGE_TYPES.clear_transactions
-        })));
+    broadcastClearTransactions(lastblocktime) {
+        
+        this.sockets.forEach(socket => this.sendClear(socket,lastblocktime));
+        
     }
 }
 

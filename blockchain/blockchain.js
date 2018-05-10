@@ -1,5 +1,6 @@
 const Block = require('./block');
 
+
 class Blockchain {
     constructor() {
         this.chain = [Block.genesis()];
@@ -18,7 +19,8 @@ class Blockchain {
     }
 
     returnLastBlockTimeStamp() {
-        const timestamp = this.chain[this.chain.length - 1].timestamp;
+        
+        const timestamp = this.chain[this.chain.length-1].timestamp;
         
         return timestamp;
     }
@@ -48,6 +50,7 @@ class Blockchain {
         }
 
         console.log('Replacing blockchain with the new chain.');
+       
         this.chain = newChain;
     }
 }

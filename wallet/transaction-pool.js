@@ -1,10 +1,13 @@
 const Transaction = require('../wallet/transaction');
-const Blockchain = require('../blockchain/blockchain');
-const array = require('arrays-difference');
+
+
+
+
 
 class TransactionPool {
     constructor() {
         this.transactions = [];
+
     }
 
     getTransactions() {
@@ -48,10 +51,26 @@ class TransactionPool {
         });
     }
 
-    clear(arrays) {
-        const difference = array(this.transactions, arrays);
-        this.transactions = difference;
+   
+        
+    clear(lastBlockTime){
+        
+        this.transactions=this.filterTransactions(lastBlockTime);   
+        
+       
     }
+    filterTransactions(lastBlockTime) {
+        return this.transactions.filter(transaction => {
+           
+            if (transaction.input.timestamp < lastBlockTime+5000) {
+                return;
+            }
+            return transaction;
+            
+            
+        });
+    }
+   
 }
 
 module.exports = TransactionPool;

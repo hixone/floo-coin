@@ -35,6 +35,7 @@ class Block {
             nonce++;
             timestamp = Date.now();
             difficulty = Block.adjustDifficulty(lastBlock, timestamp)
+            difficulty= difficulty>=1 ? difficulty : difficulty+1;
             hash = Block.hash(timestamp, lastHash, data, nonce, difficulty);
         } while (hash.substring(0, difficulty) !== '0'.repeat(difficulty));
 
