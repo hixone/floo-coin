@@ -3,11 +3,6 @@
 **Floo is a cryptocurrency, powered and managed by cloud-based blockchain**
 
 
-## Motivations:
-
-**Floo is a incentivatized blockchain evenly distributributing profits to coin holders based on share percentages.**
-
-
 ## How to excute:
 1. git clone this repository:
 2. install npm, the latest version of nodejs on your O.S
